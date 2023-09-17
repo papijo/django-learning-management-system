@@ -1,0 +1,10 @@
+django
+djangorestframework
+djangorestframework-simplejwt
+pyyaml
+requests
+django-cors-headers
+Pillow
+django-storages
+cloudinary
+django-crispy-forms

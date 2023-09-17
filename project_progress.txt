@@ -1,0 +1,13 @@
+1 Build Models (User): User, StudentProfile, TeacherProfile, InternProfile, AdminProfile
+2 Build Models (Activities): Course, Subjects, Assessments, Tests, Answers, Activities, Tasks
+3 Build Models (Communication): Chat
+4 Build Views for CRUD Operations for each Models
+5 Build Templates
+6 Apps to be created:
+    Main App
+    Courses App
+    Profile App
+    Assessment App
+    Tasks App
+    Attendance App
+    Institution App
