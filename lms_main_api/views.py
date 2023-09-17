@@ -2,6 +2,11 @@ from django.shortcuts import render
 
 from rest_framework.response import Response
 from rest_framework.decorators import api_view
+from rest_framework import generics, mixins, permissions
+
+from .serializers import UserSerializer
+
+from main.models import User
 
 # Create your views here.
 
@@ -18,3 +23,8 @@ def api_home(request, *args, **kwargs):
     }
 
     return Response(application_information)
+
+
+class UserCreateView(generics.CreateAPIView):
+    queryset = User.objects.all()
+    serializer_class = UserSerializer
