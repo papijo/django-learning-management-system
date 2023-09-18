@@ -17,8 +17,8 @@ class User(AbstractBaseUser, PermissionsMixin):
     """
 
     email = models.EmailField(unique=True, help_text="Enter Email address.")
-    first_name = models.CharField(max_length=30, blank=False, null=False)
-    last_name = models.CharField(max_length=30, blank=False, null=False)
+    first_name = models.CharField(max_length=30, blank=True, null=False)
+    last_name = models.CharField(max_length=30, blank=True, null=False)
     date_joined = models.DateTimeField(auto_now_add=True)
     is_active = models.BooleanField(default=True)
     is_staff = models.BooleanField(default=False)
