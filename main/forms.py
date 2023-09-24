@@ -22,9 +22,18 @@ class CustomUserCreationForm(UserCreationForm):
 
 # Bio Data Creation Form
 class UserBioDataForm(forms.ModelForm):
+    date_of_birth = forms.DateField(widget=forms.TextInput(attrs={"type": "date"}))
+
     class Meta:
         model = BioData
-        fields = "__all__"  # Add or customize fields as needed
+        fields = (
+            "date_of_birth",
+            "address",
+            "phone_number",
+            "avatar",
+            "next_of_kin",
+            "next_of_kin_phone_number",
+        )  # Add or customize fields as needed
 
 
 # Profile Creation Form

@@ -1,1 +1,4 @@
 lms-env/
+.env
+env/
+env

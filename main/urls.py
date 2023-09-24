@@ -6,7 +6,7 @@ from .views import (
     AdminProfileCreateView,
     InternProfileCreateView,
     UserRegistrationView,
-    UserBioDataView,
+    CreateUserBioDataView,
 )
 
 
@@ -35,7 +35,7 @@ urlpatterns = [
         name="create-intern-profile",
     ),
     # Bio Data Route
-    path("create/biodata/", UserBioDataView.as_view(), name="biodata"),
+    path("create/biodata/", CreateUserBioDataView.as_view(), name="biodata"),
     # LMS Auth Routes
     path("register/", UserRegistrationView.as_view(), name="register"),
 ]
