@@ -23,4 +23,5 @@ urlpatterns = [
     path("", RedirectView.as_view(url="lms/", permanent=True)),
     path("lms/", include("main.urls")),
     path("api/lms/", include("lms_main_api.urls")),
+    path("accounts/", include("django.contrib.auth.urls")),
 ]

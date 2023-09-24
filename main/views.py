@@ -1,16 +1,24 @@
 from django.shortcuts import render
 from django.urls import reverse_lazy
 from django.views.generic.edit import CreateView
-from django.contrib.auth.forms import UserCreationForm
 from django.contrib.auth import login
+from django.contrib.auth.mixins import LoginRequiredMixin
+from django.shortcuts import get_object_or_404
 
-from .models import StudentProfile, InstructorProfile, AdminProfile, InternProfile
+from .models import (
+    StudentProfile,
+    InstructorProfile,
+    AdminProfile,
+    InternProfile,
+    BioData,
+)
 from .forms import (
     StudentProfileForm,
     InstructorProfileForm,
     AdminProfileForm,
     InternProfileForm,
     CustomUserCreationForm,
+    UserBioDataForm,
 )
 
 
@@ -36,6 +44,22 @@ class UserRegistrationView(CreateView):
         user = form.save()
         login(self.request, user)
         return super().form_valid(form)
+
+
+class UserBioDataView(LoginRequiredMixin, CreateView):
+    model = BioData
+    form_class = UserBioDataForm
+    template_name = "registration/biodata_form.html"
+    success_url = reverse_lazy(
+        "index"
+    )  # Redirect to Profile creation page when bio data page is created.
+
+    def form_valid(self, form):
+        form.instance.user = self.request.user
+        return super().form_valid(form)
+
+    def get_queryset(self):
+        return BioData.objects.filter(user=self.request.user)
 
 
 class StudentProfileCreateView(CreateView):

@@ -1,0 +1,9 @@
+/* Media query for screens smaller than 768px (e.g., mobile phones) */
+@media (max-width: 768px) {
+  h1 {
+    font-size: 1.5rem; /* Adjust the font size for mobile devices */
+  }
+  .forgot {
+    font-size: 10 !important;
+  }
+}
