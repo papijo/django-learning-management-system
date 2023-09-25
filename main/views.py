@@ -8,6 +8,7 @@ from django.shortcuts import get_object_or_404, redirect
 from django.core.mail import send_mail
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.views import LoginView
+from django.conf import settings
 
 
 from .models import (
@@ -26,8 +27,6 @@ from .forms import (
     UserBioDataForm,
 )
 
-from learning_management_system import settings
-
 
 # Create your views here.
 
@@ -41,32 +40,6 @@ def index(request):
 
 
 # Registration View
-class UserRegistrationView(CreateView):
-    form_class = CustomUserCreationForm
-    template_name = "registration/registration_form.html"
-    success_url = reverse_lazy("index")
-
-    def form_valid(self, form):
-        # Save the user but do not log them in
-        user = form.save(commit=False)
-
-        # Customize any additional user fields as needed
-        user.first_name = form.cleaned_data["first_name"]
-        user.last_name = form.cleaned_data["last_name"]
-        user.email = form.cleaned_data["email"]
-
-        # Generate a random password (you can also allow users to set their password)
-        # Configure later
-        # user_password = user.set_unusable_password()
-
-        # Save the user with the generated password
-        user.save()
-
-        # Send registration email to the user
-
-        return super().form_valid(form)
-
-
 # class UserRegistrationView(CreateView):
 #     form_class = CustomUserCreationForm
 #     template_name = "registration/registration_form.html"
@@ -81,24 +54,56 @@ class UserRegistrationView(CreateView):
 #         user.last_name = form.cleaned_data["last_name"]
 #         user.email = form.cleaned_data["email"]
 
-#         try:
-#             # Generate a random password for the user
-#             # user.set_password(get_user_model().objects.make_random_password())
-#             user.save()
+#         # Generate a random password (you can also allow users to set their password)
+#         # Configure later
+#         # user_password = user.set_unusable_password()
 
-#             # Send registration email to the user
-#             subject = f"Welcome to LMS, {user.last_name} {user.first_name}"
-#             message = "Thank you for registering on our website. You can now log in."
-#             from_email = settings.SMTP_EMAIL_SENDER
+#         # Save the user with the generated password
+#         user.save()
 
-#             user.test_email_user(subject, message, from_email, fail_silently=False)
+#         # Send registration email to the user
 
-#             return super().form_valid(form)
+#         return super().form_valid(form)
 
-#         except ValidationError as e:
-#             # Handle validation errors if any occur during password generation
-#             form.add_error(None, str(e))
-#             return self.form_invalid(form)
+
+class UserRegistrationView(CreateView):
+    form_class = CustomUserCreationForm
+    template_name = "registration/registration_form.html"
+    success_url = reverse_lazy("index")
+
+    def form_valid(self, form):
+        # Save the user but do not log them in
+        user = form.save(commit=False)
+
+        # Customize any additional user fields as needed
+        user.first_name = form.cleaned_data["first_name"]
+        user.last_name = form.cleaned_data["last_name"]
+        user.email = form.cleaned_data["email"]
+
+        try:
+            # Generate a random password for the user
+            # user.set_password(get_user_model().objects.make_random_password())
+
+            # Send registration email to the user
+            subject = f"Welcome to LMS, {user.last_name} {user.first_name}"
+            message = "Thank you for registering on our website. You can now log in."
+            from_email = "jon.ebhota@gmail.com"
+
+            send_mail(
+                subject,
+                message,
+                from_email,
+                [user.email],
+            )
+
+            user.save()
+
+            return super().form_valid(form)
+
+        except ValidationError as e:
+            # Handle validation errors if any occur during password generation
+            form.add_error(None, str(e))
+            return self.form_invalid(form)
 
 
 # class CreateUserBioDataView(LoginRequiredMixin, CreateView):

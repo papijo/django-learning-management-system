@@ -16,10 +16,17 @@ import os
 load_dotenv()
 
 # Load Environment Variables
-SMTP_EMAIL_SENDER = os.environ.get("SMTP_EMAIL_SENDER")
-SMTP_EMAIL_PASSWORD = os.environ.get("SMTP_EMAIL_PASSWORD")
-SMTP_EMAIL_EMAIL_URL = os.environ.get("SMTP_EMAIL_EMAIL_URL")
-SMTP_EMAIL_EMAIL_PORT = os.environ.get("SMTP_EMAIL_EMAIL_PORT")
+EMAIL_HOST = os.environ.get("SMTP_EMAIL_URL_GMAIL")  # SMTP server URL
+EMAIL_PORT = 465
+EMAIL_HOST_USER = os.environ.get("SMTP_EMAIL_SENDER_GMAIL")  # Sender's email address
+EMAIL_HOST_PASSWORD = os.environ.get(
+    "SMTP_EMAIL_PASSWORD_GMAIL"
+)  # Sender's email password
+
+print(EMAIL_HOST)
+print(EMAIL_HOST_USER)
+print(EMAIL_HOST_PASSWORD)
+
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -149,5 +156,6 @@ CRISPY_TEMPLATE_PACK = "bootstrap4"
 LOGIN_REDIRECT_URL = "/"
 
 # Email Section
-EMAIL_USE_TLS = True
+
 EMAIL_BACKEND = "django.core.mail.backends.smtp.EmailBackend"
+EMAIL_USE_SSL = True

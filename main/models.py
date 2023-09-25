@@ -45,11 +45,11 @@ class User(AbstractBaseUser, PermissionsMixin):
         fullname = f"{self.first_name} {self.last_name}"
         return fullname.strip()
 
-    def test_email_user(self, subject, message, from_email=None, **kwargs):
-        """
-        Sends a test email to this user.
-        """
-        send_mail(subject, message, from_email, [self.email], **kwargs)
+    # def test_email_user(self, subject, message, from_email=None, **kwargs):
+    #     """
+    #     Sends a test email to this user.
+    #     """
+    #     send_mail(subject, message, from_email, [self.email], **kwargs)
 
 
 class BioData(models.Model):
