@@ -8,3 +8,5 @@ Pillow
 django-storages
 cloudinary
 django-crispy-forms
+python-dotenv
+crispy_bootstrap4

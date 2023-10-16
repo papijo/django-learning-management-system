@@ -23,10 +23,6 @@ EMAIL_HOST_PASSWORD = os.environ.get(
     "SMTP_EMAIL_PASSWORD_GMAIL"
 )  # Sender's email password
 
-print(EMAIL_HOST)
-print(EMAIL_HOST_USER)
-print(EMAIL_HOST_PASSWORD)
-
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
